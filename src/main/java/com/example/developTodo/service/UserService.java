@@ -1,5 +1,6 @@
 package com.example.developTodo.service;
 
+import com.example.developTodo.config.PasswordEncoder;
 import com.example.developTodo.dto.DeleteUserRequestDto;
 import com.example.developTodo.dto.SignUpResponseDto;
 import com.example.developTodo.dto.UpdateUserRequestDto;
@@ -19,11 +20,15 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder; // PasswordEncoder 인스턴스 주입받음
 
     // 회원 생성
     public SignUpResponseDto signUp(String userName, String pw, String email) {
+        // 비밀번호를 암호화하여 저장
+        String encodePassword = passwordEncoder.encode(pw);
 
-        User user = new User(userName, pw, email);
+        // 암호화된 비밀번호로 User 객체 생성
+        User user = new User(userName, encodePassword, email);
 
         User savedUser = userRepository.save(user);
 
@@ -33,7 +38,7 @@ public class UserService {
     // 특정 회원 조회
     public UserResponseDto findById(Long id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("일치하는 회원이 없습니다.")); // ctrl alt v -> 반환하는 참조값의 타입..을 자동으로 찾아준다?
+                .orElseThrow(() -> new IllegalArgumentException("일치하는 회원이 없습니다."));
 
         return new UserResponseDto(user);
     }
@@ -45,7 +50,11 @@ public class UserService {
 
     // 회원 정보 수정
     public UserResponseDto updateUserInfo(Long id, UpdateUserRequestDto updateUserRequestDto) {
-        User user = userRepository.findById(id).orElseThrow(() -> new AuthorizeException("비밀번호가 일치하지 않습니다."));
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("일치하는 회원을 찾을 수 없습니다."));
+
+        if (!passwordEncoder.matches(updateUserRequestDto.getPw(), user.getPw())) {
+            throw new AuthorizeException("비밀번호가 일치하지 않습니다.");
+        }
 
         user.updateUserInfo(updateUserRequestDto.getUsername(), updateUserRequestDto.getEmail());
         User saveUser = userRepository.save(user);
@@ -56,7 +65,9 @@ public class UserService {
     // 회원 삭제 Todo 회원 삭제 기능 작동 이상 일정 삭제해야 기능함. 수정 필요
     public void deleteUser(Long id, DeleteUserRequestDto deleteDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("일치하는 회원을 찾을 수 없습니다."));
-        if (!user.getPw().equals(deleteDto.getPw())) {
+
+        // 입력받은 비밀번호와 저장된 비밀번호가 일치하는지 검증
+        if (!passwordEncoder.matches(deleteDto.getPw(), user.getPw())) {
             throw new AuthorizeException("비밀번호가 일치하지 않습니다.");
         }
         userRepository.delete(user);
