@@ -44,7 +44,8 @@ public class LoginFilter implements Filter {
         chain.doFilter(request, response);
     }
     private boolean isWhiteListed(String path) {
-        return PatternMatchUtils.simpleMatch(WHITE_LIST,path); // URL이 화이트 리스트에 포함되면 true 반환
+        // URL이 화이트 리스트에 포함되면 true 반환
+        return PatternMatchUtils.simpleMatch(WHITE_LIST,path);
     }
 }
 

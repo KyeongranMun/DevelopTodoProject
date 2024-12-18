@@ -44,13 +44,10 @@ public class TodoService {
 
     // 특정 일정 조회
     public TodoWithNameResponseDto findById(Long id) {
-        // Optional로 감싸져있는 투두 객체 꺼내옴. 없으면 404 예외 발생
         Todo findTodo = todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("찾으려는 조건의 일정이 존재하지 않습니다."));
 
-        // 투두 객체에서 작성자 정보 가져오기
         User author = findTodo.getUser();
 
-        // 반환타입 일치시키기
         return new TodoWithNameResponseDto(findTodo.getTitle(), findTodo.getContents(), author.getUsername());
     }
 

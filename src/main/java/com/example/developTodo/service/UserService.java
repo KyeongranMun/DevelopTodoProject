@@ -12,14 +12,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-// 유저 생성, 특정 유저 조회, 전체 유저 조회, 유저 정보 수정(작성자명, 이메일, 비밀번호, 비밀번호 검증), 유저 삭제(비밀번호 검증)
 
 @Service
-@RequiredArgsConstructor // 다른 클래스나 인터페이스의 생성자를 주입받기 위해 해당 애너테이션을 붙여준다.
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder; // PasswordEncoder 인스턴스 주입받음
+    private final PasswordEncoder passwordEncoder;
 
     // 특정 회원 조회
     public UserResponseDto findById(Long id) {
@@ -48,7 +47,7 @@ public class UserService {
         return new UserResponseDto(saveUser);
     }
 
-    // 회원 삭제 Todo 회원 삭제 기능 작동 이상 일정 삭제해야 기능함. 수정 필요
+    // 회원 삭제
     public void deleteUser(Long id, DeleteUserRequestDto deleteDto) {
         User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("일치하는 회원을 찾을 수 없습니다."));
 

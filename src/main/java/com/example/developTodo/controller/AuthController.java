@@ -6,7 +6,6 @@ import com.example.developTodo.dto.SignUpRequestDto;
 import com.example.developTodo.dto.SignUpResponseDto;
 import com.example.developTodo.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,10 @@ public class AuthController {
 
     private final AuthService authService;
 
-    // 회원 생성 API
+    /**
+     * 회원가입 API
+     * @return 응답 DTO, 성공 시 201 CREATED 상태 코드
+     */
     @PostMapping("/signup")
     public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
 
@@ -35,31 +37,34 @@ public class AuthController {
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
     }
 
-    // 로그인 API
+    /**
+     * 로그인 API
+     * @param request HttpServletRequest 객체를 통해 세션 관리
+     * @return 응답 DTO, 성공 시 200 OK 상태 코드
+     */
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto, HttpServletRequest request) {
 
-        log.info("로그인 확인 1");
         LoginResponseDto responseDto = authService.login(requestDto.getEmail(), requestDto.getPw());
 
-        log.info("로그인 확인 2");
         HttpSession session = request.getSession(true);
         session.setAttribute("loginStatus", responseDto);
 
-        log.info("로그인 확인 3");
         return new ResponseEntity<>(responseDto, HttpStatus.OK);
     }
 
-    // 로그아웃 API
+    /**
+     * 로그아웃 API
+     * @param request HttpServletRequest 객체를 통해 세션 정보에 접근
+     * @return 성공 시 로그아웃 메시지와 200 OK 상태 코드 반환
+     */
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseEntity<String> logout(HttpServletRequest request) {
         // 세션 무효화
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-
-        // 쿠키 삭제...
 
         return new ResponseEntity<>("로그아웃 되었습니다", HttpStatus.OK);
     }

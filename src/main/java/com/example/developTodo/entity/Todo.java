@@ -1,5 +1,4 @@
 package com.example.developTodo.entity;
-// 작성 유저 고유 식별자, 할 일 제목, 할 일 내용, 작성일, 수정일 필드 (작성일 수정일은 JPA Auditing) -> 작성 유저명 필드 대신 유저 고유 식별자 필드를 가져야 함
 
 import jakarta.persistence.*;
 import lombok.Getter;

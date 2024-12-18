@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-// 예외는 여기에서만! ExceptionHandler 애너테이션 달아서 해주기 TODO 글자 수 넘었을 때 예외 날리기
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     // 일치하는 데이터가 없을 때
