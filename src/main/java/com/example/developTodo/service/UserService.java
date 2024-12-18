@@ -2,7 +2,6 @@ package com.example.developTodo.service;
 
 import com.example.developTodo.config.PasswordEncoder;
 import com.example.developTodo.dto.DeleteUserRequestDto;
-import com.example.developTodo.dto.SignUpResponseDto;
 import com.example.developTodo.dto.UpdateUserRequestDto;
 import com.example.developTodo.dto.UserResponseDto;
 import com.example.developTodo.entity.User;
@@ -21,19 +20,6 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder; // PasswordEncoder 인스턴스 주입받음
-
-    // 회원 생성
-    public SignUpResponseDto signUp(String userName, String pw, String email) {
-        // 비밀번호를 암호화하여 저장
-        String encodePassword = passwordEncoder.encode(pw);
-
-        // 암호화된 비밀번호로 User 객체 생성
-        User user = new User(userName, encodePassword, email);
-
-        User savedUser = userRepository.save(user);
-
-        return new SignUpResponseDto(savedUser.getId(), savedUser.getUsername(), savedUser.getEmail());
-    }
 
     // 특정 회원 조회
     public UserResponseDto findById(Long id) {

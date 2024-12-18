@@ -19,4 +19,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> updateAuthorizeException(AuthorizeException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
+
+    // 이메일 중복 여부 확인
+    @ExceptionHandler(DuplicateException.class)
+    public ResponseEntity<String> emailDuplicateException(DuplicateException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

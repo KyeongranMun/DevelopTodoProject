@@ -1,6 +1,8 @@
 package com.example.developTodo.controller;
 
-import com.example.developTodo.dto.*;
+import com.example.developTodo.dto.DeleteUserRequestDto;
+import com.example.developTodo.dto.UpdateUserRequestDto;
+import com.example.developTodo.dto.UserResponseDto;
 import com.example.developTodo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,19 +19,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-    // 회원 생성 API
-    @PostMapping("/signup")
-    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
-        SignUpResponseDto signUpResponseDto =
-                userService.signUp(
-                        requestDto.getUsername(),
-                        requestDto.getPw(),
-                        requestDto.getEmail()
-                );
-
-        return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
-    }
 
     // 특정 회원 조회 API
     @GetMapping("/{id}")
