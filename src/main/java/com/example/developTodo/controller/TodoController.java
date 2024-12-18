@@ -37,7 +37,7 @@ public class TodoController {
     @GetMapping // TODO 날짜 기준 조회 기능 추가 쿼리 dsl?
     public ResponseEntity<List<TodoResponseDto>> findAll() {
         List<TodoResponseDto> todoResponseDtoList = todoService.findAll();
-        return new ResponseEntity<>(todoResponseDtoList, HttpStatus.OK);
+        return ResponseEntity.ok(todoResponseDtoList);
     }
 
     // 특정 일정 조회 API, 성공 시 응답 DTO와 200 OK 상태 코드 반환

@@ -17,7 +17,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class LoginFilter implements Filter {
 
-    private static final String [] WHITE_LIST = {"/auth/login", "/auth/signup"};
+    private static final String [] WHITE_LIST = {"/auth/*"};
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

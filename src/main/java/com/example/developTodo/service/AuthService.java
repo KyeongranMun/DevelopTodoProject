@@ -1,6 +1,7 @@
 package com.example.developTodo.service;
 
 import com.example.developTodo.config.PasswordEncoder;
+import com.example.developTodo.dto.LoginRequestDto;
 import com.example.developTodo.dto.LoginResponseDto;
 import com.example.developTodo.dto.SignUpRequestDto;
 import com.example.developTodo.dto.SignUpResponseDto;
@@ -34,12 +35,12 @@ public class AuthService {
     }
 
     // 로그인
-    public LoginResponseDto login(String email, String pw) {
+    public LoginResponseDto login(LoginRequestDto requestDto) {
 
-        User user = userRepository.findUsersByEmail(email)
+        User user = userRepository.findUsersByEmail(requestDto.getEmail())
                 .orElseThrow(() -> new IllegalArgumentException("등록되지 않은 이메일입니다."));
 
-        if (!passwordEncoder.matches(pw, user.getPw())) {
+        if (!passwordEncoder.matches(requestDto.getPw(), user.getPw())) {
             throw new AuthorizeException("비밀번호가 일치하지 않습니다.");
         }
 

@@ -31,8 +31,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
 
-        SignUpResponseDto signUpResponseDto =
-                authService.signUp(requestDto);
+        SignUpResponseDto signUpResponseDto = authService.signUp(requestDto);
 
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.CREATED);
     }
@@ -45,12 +44,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto, HttpServletRequest request) {
 
-        LoginResponseDto responseDto = authService.login(requestDto.getEmail(), requestDto.getPw());
+        LoginResponseDto responseDto = authService.login(requestDto);
 
         HttpSession session = request.getSession(true);
         session.setAttribute("loginStatus", responseDto);
 
-        return new ResponseEntity<>(responseDto, HttpStatus.OK);
+        return ResponseEntity.ok(responseDto);
     }
 
     /**
