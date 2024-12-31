@@ -1,10 +1,10 @@
 package com.example.developTodo.service;
 
 import com.example.developTodo.config.PasswordEncoder;
-import com.example.developTodo.dto.DeleteTodoRequestDto;
-import com.example.developTodo.dto.TodoResponseDto;
-import com.example.developTodo.dto.TodoWithNameResponseDto;
-import com.example.developTodo.dto.UpdateTodoRequestDto;
+import com.example.developTodo.dto.todoDto.DeleteTodoRequestDto;
+import com.example.developTodo.dto.todoDto.TodoResponseDto;
+import com.example.developTodo.dto.todoDto.TodoWithNameResponseDto;
+import com.example.developTodo.dto.todoDto.UpdateTodoRequestDto;
 import com.example.developTodo.entity.Todo;
 import com.example.developTodo.entity.User;
 import com.example.developTodo.exception.AuthorizeException;

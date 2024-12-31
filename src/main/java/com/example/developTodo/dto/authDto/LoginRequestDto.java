@@ -1,4 +1,4 @@
-package com.example.developTodo.dto;
+package com.example.developTodo.dto.authDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

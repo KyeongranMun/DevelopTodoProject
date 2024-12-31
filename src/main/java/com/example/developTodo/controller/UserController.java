@@ -1,8 +1,8 @@
 package com.example.developTodo.controller;
 
-import com.example.developTodo.dto.DeleteUserRequestDto;
-import com.example.developTodo.dto.UpdateUserRequestDto;
-import com.example.developTodo.dto.UserResponseDto;
+import com.example.developTodo.dto.userDto.DeleteUserRequestDto;
+import com.example.developTodo.dto.userDto.UpdateUserRequestDto;
+import com.example.developTodo.dto.userDto.UserResponseDto;
 import com.example.developTodo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

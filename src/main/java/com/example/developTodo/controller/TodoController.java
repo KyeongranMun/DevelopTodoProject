@@ -1,6 +1,6 @@
 package com.example.developTodo.controller;
 
-import com.example.developTodo.dto.*;
+import com.example.developTodo.dto.todoDto.*;
 import com.example.developTodo.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

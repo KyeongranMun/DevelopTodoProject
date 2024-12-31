@@ -1,9 +1,9 @@
 package com.example.developTodo.controller;
 
-import com.example.developTodo.dto.LoginRequestDto;
-import com.example.developTodo.dto.LoginResponseDto;
-import com.example.developTodo.dto.SignUpRequestDto;
-import com.example.developTodo.dto.SignUpResponseDto;
+import com.example.developTodo.dto.authDto.LoginRequestDto;
+import com.example.developTodo.dto.authDto.LoginResponseDto;
+import com.example.developTodo.dto.authDto.SignUpRequestDto;
+import com.example.developTodo.dto.authDto.SignUpResponseDto;
 import com.example.developTodo.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -1,10 +1,10 @@
 package com.example.developTodo.service;
 
 import com.example.developTodo.config.PasswordEncoder;
-import com.example.developTodo.dto.LoginRequestDto;
-import com.example.developTodo.dto.LoginResponseDto;
-import com.example.developTodo.dto.SignUpRequestDto;
-import com.example.developTodo.dto.SignUpResponseDto;
+import com.example.developTodo.dto.authDto.LoginRequestDto;
+import com.example.developTodo.dto.authDto.LoginResponseDto;
+import com.example.developTodo.dto.authDto.SignUpRequestDto;
+import com.example.developTodo.dto.authDto.SignUpResponseDto;
 import com.example.developTodo.entity.User;
 import com.example.developTodo.exception.AuthorizeException;
 import com.example.developTodo.repository.UserRepository;
