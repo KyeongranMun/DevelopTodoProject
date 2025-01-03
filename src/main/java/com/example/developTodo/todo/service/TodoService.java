@@ -12,6 +12,7 @@ import com.example.developTodo.todo.infrastructure.TodoRepository;
 import com.example.developTodo.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class TodoService {
     private final PasswordEncoder passwordEncoder;
 
     // 일정 생성
+    @Transactional
     public TodoResponseDto save(String title, String contents, String username) {
         User findUser = userRepository.findUserByUsername(username).orElseThrow(() -> new IllegalArgumentException("일치하는 회원이 없습니다."));
 
@@ -67,6 +69,7 @@ public class TodoService {
     }
 
     // 일정 삭제
+    @Transactional
     public void deleteTodo(Long id, DeleteTodoRequestDto deleteTodoRequestDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("일치하는 조건의 일정이 없습니다."));
 

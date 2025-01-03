@@ -10,6 +10,7 @@ import com.example.developTodo.common.exception.AuthorizeException;
 import com.example.developTodo.user.infrastructure.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
 
     // 회원 생성
+    @Transactional
     public SignUpResponseDto signUp(SignUpRequestDto requestDto) {
         // 비밀번호를 암호화하여 저장
         String encodePassword = passwordEncoder.encode(requestDto.pw());
