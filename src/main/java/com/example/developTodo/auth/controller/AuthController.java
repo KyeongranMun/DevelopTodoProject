@@ -7,6 +7,7 @@ import com.example.developTodo.auth.domain.SignUpResponseDto;
 import com.example.developTodo.auth.service.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class AuthController {
      * @return 응답 DTO, 성공 시 201 CREATED 상태 코드
      */
     @PostMapping("/signup")
-    public ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto requestDto) {
+    public ResponseEntity<SignUpResponseDto> signUp(@Valid @RequestBody SignUpRequestDto requestDto) {
 
         SignUpResponseDto signUpResponseDto = authService.signUp(requestDto);
 
@@ -42,7 +43,7 @@ public class AuthController {
      * @return 응답 DTO, 성공 시 200 OK 상태 코드
      */
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto requestDto, HttpServletRequest request) {
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto requestDto, HttpServletRequest request) {
 
         LoginResponseDto responseDto = authService.login(requestDto);
 
